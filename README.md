@@ -96,3 +96,36 @@ fullStack/
 │   │   └── api.js      # API configuration
 └── start-dev.bat       # Quick start script
 ```
+### Architecture Overview
+
+The application follows a **client-server architecture**:
+
+- The React frontend communicates with the backend using REST APIs.
+- JWT-based authentication protects secure routes.
+- MongoDB stores users, boards, lists, and tasks.
+- Socket.IO enables real-time synchronization across connected users.
+- When a task is created, updated, deleted, or moved, the backend emits WebSocket events to update all connected clients instantly.
+```
+## Authentication Flow
+
+1. User registers → Password hashed using Bcrypt.
+2. User logs in → JWT token generated.
+3. Token stored on frontend.
+4. Protected routes validated using middleware on backend.
+
+---
+
+## API Documentation
+
+## Auth APIs
+
+## POST /api/auth/register
+Register a new user.
+
+**Request:**
+```json
+{
+  "name": "John",
+  "email": "john@example.com",
+  "password": "123456"
+}
